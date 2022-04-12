@@ -1,0 +1,17 @@
+.card {
+  width: 300px;
+  padding: 10px;
+}
+
+.card img {
+  margin: 30px 0;
+}
+
+.calorieDetail {
+  padding: 10px;
+}
+
+.count {
+  padding: 10px;
+  margin-bottom: 0;
+}
