@@ -5,94 +5,41 @@ const cors = require("cors");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const { spawn } = require("child_process");
+const authRoute = require("./routes/auth");
+
 const client = require("twilio")(
   "AC4b637e7ed06a85954387e5282659a26b",
   "cd76ac8c9ce011967fecb99200a19ad5"
 );
+const PORT = process.env.PORT || 5000;
 
 // +1 334 459 9701
 // +16165778934;
 
-// const bodyParser = require('body-parser');
 const User = require("./model/UserSchema");
 
-app.use(cors());
 app.use(express.json());
-// app.use(bodyParser.json());
+app.use(cors());
 
 require("./db/connection");
 
-const PORT = process.env.PORT || 8000;
-
-function msg() {
-  client.messages
-    .create({
-      body: "This is the ship that made the Kessel Run in fourteen parsecs?",
-      from: "+16165778934",
-      to: "+919337157734",
-    })
-    .then((message) => console.log(message.sid))
-    .catch((err) => console.log(err));
-}
+// function msg() {
+//   client.messages
+//     .create({
+//       body: "This is the ship that made the Kessel Run in fourteen parsecs?",
+//       from: "+16165778934",
+//       to: "+919337157734",
+//     })
+//     .then((message) => console.log(message.sid))
+//     .catch((err) => console.log(err));
+// }
 
 app.get("/", (req, res) => {
   // msg();
   res.send("Hello World from server of SIH-22");
 });
 
-app.post("/api/register", async (req, res) => {
-  // console.log(req.body);
-  try {
-    const hashPassword = await bcrypt.hash(req.body.password, 10);
-    const date = new Date().getDate();
-    const month = new Date().getMonth();
-    const year = new Date().getFullYear();
-    const d = new Date(year, month, date) + 5.5 * 60 * 60 * 1000;
-    console.log(d);
-    let details = { date: d, biceps: 0, triceps: 0, squats: 0, calories: 0 };
-    await User.create({
-      name: req.body.name,
-      email: req.body.email,
-      phone: req.body.phone,
-      height: req.body.height,
-      weight: req.body.weight,
-      password: hashPassword,
-      data: details,
-    });
-    res.json({ status: "ok" });
-  } catch (error) {
-    res.json({ status: "error", error: "Duplicate Email" });
-  }
-});
-
-app.post("/api/login", async (req, res) => {
-  const user = await User.findOne({
-    email: req.body.email,
-  });
-
-  if (!user) {
-    return { status: "error", error: "Invalid login" };
-  }
-
-  const isPasswordValid = await bcrypt.compare(
-    req.body.password,
-    user.password
-  );
-
-  if (isPasswordValid) {
-    const token = jwt.sign(
-      {
-        name: user.name,
-        email: user.email,
-      },
-      "secret123"
-    );
-
-    return res.json({ status: "ok", user: token });
-  } else {
-    return res.json({ status: "error", user: false });
-  }
-});
+app.use("/api/auth", authRoute);
 
 app.get("/api/biceps", (req, res) => {
   let dataToSend;
@@ -137,7 +84,6 @@ app.post("/api/post", async (req, res) => {
   const token = req.headers["x-access-token"];
   let { count, exercise } = req.body;
   console.log(count, exercise);
-  // console.log(token);
   try {
     const decoded = jwt.verify(token, "secret123");
     const email = decoded.email;
