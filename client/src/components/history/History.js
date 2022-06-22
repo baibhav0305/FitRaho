@@ -14,7 +14,7 @@ const History = () => {
   const [userData, setUserData] = useState([]);
 
   const fetchUserHistory = async () => {
-    const response = await fetch("http://localhost:8000/api/history", {
+    const response = await fetch("http://localhost:5000/api/user", {
       headers: {
         "x-access-token": localStorage.getItem("token"),
       },
@@ -65,7 +65,7 @@ const History = () => {
               <th scope="col">Date</th>
               <th scope="col">Biceps</th>
               <th scope="col">Triceps</th>
-              <th scope="col">Squats</th>
+              <th scope="col">PushUps</th>
               <th scope="col">Calories</th>
             </tr>
           </thead>

@@ -16,7 +16,7 @@ const Register = () => {
   const registerUser = async (e) => {
     e.preventDefault();
 
-    const response = await fetch("http://localhost:8000/api/register", {
+    const response = await fetch("http://localhost:5000/api/auth/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -59,12 +59,12 @@ const Register = () => {
 
   return (
     <div className="container r">
-      <div class="forms-container">
-        <div class="signin-signup">
-          <form onSubmit={registerUser} class="sign-up-form">
-            <h2 class="title">Sign up</h2>
-            <div class="input-field">
-              <i class="fas fa-user"></i>
+      <div className="forms-container">
+        <div className="signin-signup">
+          <form onSubmit={registerUser} className="sign-up-form">
+            <h2 className="title">Sign up</h2>
+            <div className="input-field">
+              <i className="fas fa-user"></i>
               <input
                 type="text"
                 placeholder="Name"
@@ -72,8 +72,8 @@ const Register = () => {
                 onChange={(e) => setName(e.target.value)}
               />
             </div>
-            <div class="input-field">
-              <i class="fas fa-envelope"></i>
+            <div className="input-field">
+              <i className="fas fa-envelope"></i>
               <input
                 type="email"
                 placeholder="Email"
@@ -81,8 +81,8 @@ const Register = () => {
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
-            <div class="input-field">
-              <i class="fas fa-lock"></i>
+            <div className="input-field">
+              <i className="fas fa-lock"></i>
               <input
                 type="password"
                 placeholder="Password"
@@ -90,8 +90,8 @@ const Register = () => {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
-            <div class="input-field">
-              <i class="fas fa-phone"></i>
+            <div className="input-field">
+              <i className="fas fa-phone"></i>
               <input
                 type="text"
                 placeholder="Phone No"
@@ -99,8 +99,8 @@ const Register = () => {
                 onChange={(e) => setPhone(e.target.value)}
               />
             </div>
-            <div class="input-field">
-              <i class="fa-solid fa-ruler-vertical"></i>
+            <div className="input-field">
+              <i className="fa-solid fa-ruler-vertical"></i>
               <input
                 type="text"
                 placeholder="Height"
@@ -108,8 +108,8 @@ const Register = () => {
                 onChange={(e) => setHeight(e.target.value)}
               />
             </div>
-            <div class="input-field">
-              <i class="fas fa-weight-scale"></i>
+            <div className="input-field">
+              <i className="fas fa-weight-scale"></i>
               <input
                 type="text"
                 placeholder="Weight"
@@ -117,7 +117,7 @@ const Register = () => {
                 onChange={(e) => setWeight(e.target.value)}
               />
             </div>
-            
+
             <input type="submit" value="Sign Up" className="btn" />
           </form>
           <ToastContainer
@@ -133,20 +133,20 @@ const Register = () => {
           />
         </div>
       </div>
-      <div class="panels-container">
-        <div class="panel left-panel">
-          <div class="content">
+      <div className="panels-container">
+        <div className="panel left-panel">
+          <div className="content">
             <h3>One of us?</h3>
             <p>
               To keep connected with us please login with your personal info.
             </p>
             <Link to="/login">
-              <button class="btn transparent" id="sign-in-btn">
+              <button className="btn transparent" id="sign-in-btn">
                 Sign in
               </button>
             </Link>
           </div>
-          <img src="./register.svg" class="image" alt="img" />
+          <img src="./register.svg" className="image" alt="img" />
         </div>
       </div>
     </div>

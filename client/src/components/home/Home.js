@@ -1,7 +1,7 @@
 import React from "react";
 import "./Home.css";
 import "bootstrap/dist/css/bootstrap.css";
-import Card from "./Card";
+import Card from "../card/Card";
 
 const Home = () => {
   return (

@@ -1,8 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("token"));
+
+  const handleLogout = () => {
+    if (window.confirm("Logout of FitRaho?")) {
+      localStorage.removeItem("token");
+      setIsLoggedIn(false);
+    }
+  };
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -38,16 +46,26 @@ const Navbar = () => {
                   History
                 </Link>
               </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/login">
-                  LogIn
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/register">
-                  Register
-                </Link>
-              </li>
+              {!isLoggedIn ? (
+                <>
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/login">
+                      LogIn
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/register">
+                      Register
+                    </Link>
+                  </li>
+                </>
+              ) : (
+                <li className="nav-item">
+                  <Link className="nav-link" to="/" onClick={handleLogout}>
+                    Logout
+                  </Link>
+                </li>
+              )}
             </ul>
           </div>
         </div>

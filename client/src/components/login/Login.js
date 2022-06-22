@@ -13,7 +13,7 @@ const Login = () => {
   const loginUser = async (e) => {
     e.preventDefault();
 
-    const response = await fetch("http://localhost:8000/api/login", {
+    const response = await fetch("http://localhost:5000/api/auth/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -53,12 +53,12 @@ const Login = () => {
 
   return (
     <div className="container r">
-      <div class="forms-container">
-        <div class="signin-signup">
-          <form onSubmit={loginUser} class="sign-in-form">
-            <h2 class="title">Sign in</h2>
-            <div class="input-field">
-              <i class="fas fa-envelope"></i>
+      <div className="forms-container">
+        <div className="signin-signup">
+          <form onSubmit={loginUser} className="sign-in-form">
+            <h2 className="title">Sign in</h2>
+            <div className="input-field">
+              <i className="fas fa-envelope"></i>
               <input
                 type="email"
                 placeholder="Email"
@@ -67,8 +67,8 @@ const Login = () => {
               />
             </div>
 
-            <div class="input-field">
-              <i class="fas fa-lock"></i>
+            <div className="input-field">
+              <i className="fas fa-lock"></i>
               <input
                 type="password"
                 placeholder="Password"
@@ -77,7 +77,7 @@ const Login = () => {
               />
             </div>
 
-            <input type="submit" value="LogIn" class="btn solid" />
+            <input type="submit" value="LogIn" className="btn solid" />
           </form>
           <ToastContainer
             position="top-right"
@@ -92,18 +92,18 @@ const Login = () => {
           />
         </div>
       </div>
-      <div class="panels-container">
-        <div class="panel left-panel">
-          <div class="content">
+      <div className="panels-container">
+        <div className="panel left-panel">
+          <div className="content">
             <h3>New here?</h3>
             <p>Enter your personal details and start journey with us.</p>
             <Link to="/register">
-              <button class="btn transparent" id="sign-up-btn">
+              <button className="btn transparent" id="sign-up-btn">
                 Sign up
               </button>
             </Link>
           </div>
-          <img src="./log.svg" class="image" alt="img" />
+          <img src="./log.svg" className="image" alt="img" />
         </div>
       </div>
     </div>

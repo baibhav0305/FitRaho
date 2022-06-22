@@ -8,7 +8,9 @@ const Card = ({ exercise, imgUrl, calorie }) => {
   const [count, setCount] = useState(0);
 
   const pythonScript = async () => {
-    const response = await fetch(`http://localhost:8000/api/${exercise}`);
+    const response = await fetch(
+      `http://localhost:5000/api/exercise/${exercise}`
+    );
     console.log(response);
     const data = await response.json();
     console.log(data);
@@ -16,7 +18,7 @@ const Card = ({ exercise, imgUrl, calorie }) => {
   };
 
   const saveToDatabase = async () => {
-    const response = await fetch(`http://localhost:8000/api/post`, {
+    const response = await fetch(`http://localhost:5000/api/exercise`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -25,6 +27,7 @@ const Card = ({ exercise, imgUrl, calorie }) => {
       body: JSON.stringify({ count, exercise }),
     });
     const data = await response.json();
+    console.log(data);
     if (data.status === "ok") {
       toast.success("Data Saved Successfully!", {
         position: "top-right",
