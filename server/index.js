@@ -4,6 +4,7 @@ const cors = require("cors");
 const authRoute = require("./routes/auth");
 const exerciseRoute = require("./routes/exercise");
 const userRoute = require("./routes/user");
+require("dotenv").config();
 
 const client = require("twilio")(
   "AC4b637e7ed06a85954387e5282659a26b",
