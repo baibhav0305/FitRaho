@@ -2,12 +2,13 @@ import React from "react";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Navbar from "./components/Navbar";
-import Home from "./components/Home";
+import Navbar from "./components/navbar/Navbar";
+import Home from "./components/home/Home";
 import About from "./components/about/About";
-import Login from "./components/Login";
-import Register from "./components/Register";
-import History from "./components/History";
+import Login from "./components/login/Login";
+import Register from "./components/register/Register";
+import History from "./components/history/History";
+import Logout from "./components/logout/Logout";
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
           <Route path="/history" element={<History />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/logout" element={<Logout />} />
         </Routes>
       </Router>
     </div>
