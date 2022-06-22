@@ -32,7 +32,7 @@ router.get("/triceps", (req, res) => {
 });
 
 // PUSHUPS || SQUATS
-router.get("/squats", (req, res) => {
+router.get("/pushups", (req, res) => {
   let dataToSend;
   const python = spawn("python", ["check1.py"]);
   python.stdout.on("data", (data) => {
@@ -58,12 +58,12 @@ router.post("/", async (req, res) => {
     const month = new Date().getMonth();
     const year = new Date().getFullYear();
     const d = new Date(year, month, date) + 5.5 * 60 * 60 * 1000;
-    console.log(d + 5.5 * 60 * 60 * 1000);
 
     const user = await User.findOne({ email: email }, { data: { $slice: -1 } });
 
     const ndata = user.data;
-    if (ndata[0].date === d) {
+    console.log(ndata[0]);
+    if (ndata[0] && ndata[0].date === d) {
       if (exercise === "biceps") {
         let ctr = count + ndata[0].calories;
         count = count + ndata[0].biceps;
@@ -79,7 +79,7 @@ router.post("/", async (req, res) => {
           { $set: { "data.$.triceps": count, "data.$.calories": ctr } }
         );
       } else {
-        let ctr = 2 * count + ndata[0].squats;
+        let ctr = 2 * count + ndata[0].calories;
         count = count + ndata[0].squats;
         await User.findOneAndUpdate(
           { email: email, "data.date": d },
@@ -94,7 +94,7 @@ router.post("/", async (req, res) => {
           biceps: count,
           triceps: 0,
           squats: 0,
-          calories: 0,
+          calories: count,
         };
       } else if (exercise === "triceps") {
         newData = {
@@ -102,7 +102,7 @@ router.post("/", async (req, res) => {
           biceps: 0,
           triceps: count,
           squats: 0,
-          calories: 0,
+          calories: count,
         };
       } else {
         newData = {
@@ -110,7 +110,7 @@ router.post("/", async (req, res) => {
           biceps: 0,
           triceps: 0,
           squats: count,
-          calories: 0,
+          calories: 2 * count,
         };
       }
       await User.findOneAndUpdate(
