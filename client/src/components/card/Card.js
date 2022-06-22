@@ -9,7 +9,7 @@ const Card = ({ exercise, imgUrl, calorie }) => {
 
   const pythonScript = async () => {
     const response = await fetch(
-      `http://localhost:5000/api/exercise/${exercise}`
+      `https://fit-raho.herokuapp.com/api/exercise/${exercise}`
     );
     console.log(response);
     const data = await response.json();
@@ -18,14 +18,17 @@ const Card = ({ exercise, imgUrl, calorie }) => {
   };
 
   const saveToDatabase = async () => {
-    const response = await fetch(`http://localhost:5000/api/exercise`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "x-access-token": localStorage.getItem("token"),
-      },
-      body: JSON.stringify({ count, exercise }),
-    });
+    const response = await fetch(
+      `https://fit-raho.herokuapp.com/api/exercise`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-access-token": localStorage.getItem("token"),
+        },
+        body: JSON.stringify({ count, exercise }),
+      }
+    );
     const data = await response.json();
     console.log(data);
     if (data.status === "ok") {
