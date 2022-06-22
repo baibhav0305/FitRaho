@@ -62,7 +62,7 @@ router.post("/", async (req, res) => {
     const user = await User.findOne({ email: email }, { data: { $slice: -1 } });
 
     const ndata = user.data;
-    console.log(ndata[0]);
+    // console.log(ndata[0]);
     if (ndata[0] && ndata[0].date === d) {
       if (exercise === "biceps") {
         let ctr = count + ndata[0].calories;
