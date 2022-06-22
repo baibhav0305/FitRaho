@@ -1,5 +1,5 @@
 import React from "react";
-import "./Home.css";
+import "./Home.scss";
 import "bootstrap/dist/css/bootstrap.css";
 import Card from "../card/Card";
 

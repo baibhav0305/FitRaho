@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import jwt from "jsonwebtoken";
 import "bootstrap/dist/css/bootstrap.css";
 import Table from "../Table";
-import "./History.css";
+import "./History.scss";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
