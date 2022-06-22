@@ -11,7 +11,6 @@ router.post("/register", async (req, res) => {
     const month = new Date().getMonth();
     const year = new Date().getFullYear();
     const d = new Date(year, month, date) + 5.5 * 60 * 60 * 1000;
-    // console.log(d);
     let details = { date: d, biceps: 0, triceps: 0, squats: 0, calories: 0 };
     await User.create({
       name: req.body.name,
@@ -53,7 +52,6 @@ router.post("/login", async (req, res) => {
       },
       "secret123"
     );
-    // console.log(token);
 
     res.status(200).json({ status: "ok", user: token });
   } else {
